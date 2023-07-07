@@ -24,18 +24,43 @@ function getPro(req, res){
 }
 
 function postPro(req, res){
-    let answer = {error: false, code: 200, message: "User successfullly registered", result:result};
-    res.send(answer);
+    let answer;
+    let profesional = new ProModel({
+        name: req.body.name,
+        lastname: req.body.lastname,
+        weight: req.body.weight,
+        height: req.body.height,
+        isRetired: req.body.isRetired,
+        nationality: req.body.nationality,
+        oscarsNumber: req.body.oscarsNumber,
+        profession: req.body.profesional,
+        photo: req.body.photo
+    });
+    ProModel.create(profesional)
+        .then((pro) => {
+            answer = {error: false, code: 200, message: "Professional correctly stored", result: pro};
+            res.send(answer);
+        })
 }
 
 function putPro(req, res){
-    let answer = {error: false, code: 200, message: "User successfullly registered", result:result};
-    res.send(answer);
+    let answer;
+    const {name, lastname, weight, height, isRetired, nationality, oscarsNumber, profession, photo, id} = req.body;
+    ProModel.updateOne({_id: id}, {name: name, lastname: lastname, weight: weight, height: height, isRetired: isRetired, nationality: nationality, oscarsNumber: oscarsNumber, profession: profession, photo: photo})
+        .then((pro) => {
+            answer = {error: false, code: 200, message: "Professional correctly updated", result: pro};
+            res.send(answer);
+        })
 }
 
 function delPro(req, res){
-    let answer = {error: false, code: 200, message: "User successfullly registered", result:result};
-    res.send(answer);
+    let answer;
+    const id = req.body.id;
+    ProModel.deleteOne({_id: id})
+        .then(function(pro) {
+            answer = {error: false, code: 200, message: "Professional correctly deleted", result: pro};
+            res.send(answer);
+        })
 }
 
 module.exports = {getPro, postPro, putPro, delPro};
