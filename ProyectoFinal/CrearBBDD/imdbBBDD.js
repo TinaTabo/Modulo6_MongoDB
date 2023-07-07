@@ -1,14 +1,15 @@
 //-- Uso del modelo
 let mongoose = require("mongoose");
 
-let Professional = require('./apiRest/src/model/professionalSchema');
+let Professional = require('./professionalSchema');
 
 mongoose.connect('mongodb+srv://cris_taboada:MySecur3Mongo@codenotch.i0gbn5t.mongodb.net/imdb',
                 {useNewUrlParser: false, useUnifiedTopology: false});
 
 //-- Datos de profesionales del cine para añadir a la BBDD de MongoDB
 const pro1 = {
-    name: "Tom Hanks",
+    name: "Tom",
+    lastname: "Hanks",
     age: 65,
     weight: 77.1,
     height: 1.83,
@@ -20,7 +21,8 @@ const pro1 = {
 };
 
 const pro2 = {
-    name: "Meryl Streep",
+    name: "Meryl",
+    lastname: "Streep",
     age: 72,
     weight: 59.0,
     height: 1.68,
@@ -32,7 +34,8 @@ const pro2 = {
 };
 
 const pro3 = {
-    name: "Leonardo DiCaprio",
+    name: "Leonardo",
+    lastname: "DiCaprio",
     age: 46,
     weight: 75.4,
     height: 1.83,
@@ -44,7 +47,8 @@ const pro3 = {
 };
 
 const pro4 = {
-    name: "Penélope Cruz",
+    name: "Penélope",
+    lastname: "Cruz",
     age: 47,
     weight: 56.7,
     height: 1.68,
@@ -56,7 +60,8 @@ const pro4 = {
 };
 
 const pro5 = {
-    name: "Denzel Washington",
+    name: "Denzel",
+    lastname: "Washington",
     age: 67,
     weight: 89.5,
     height: 1.85,
@@ -68,7 +73,8 @@ const pro5 = {
 };
 
 const pro6 = {
-    name: "Cate Blanchett",
+    name: "Cate",
+    lastname: "Blanchett",
     age: 52,
     weight: 59.8,
     height: 1.74,
@@ -80,7 +86,8 @@ const pro6 = {
 };
 
 const pro7 = {
-    name: "Joaquin Phoenix",
+    name: "Joaquin",
+    lastname: "Phoenix",
     age: 47,
     weight: 76.2,
     height: 1.73,
@@ -92,7 +99,8 @@ const pro7 = {
 };
 
 const pro8 = {
-    name: "Natalie Portman",
+    name: "Natalie",
+    lastname: "Portman",
     age: 40,
     weight: 55.0,
     height: 1.60,
@@ -103,11 +111,11 @@ const pro8 = {
     photo: "https://cdn.semana.es/wp-content/uploads/2021/05/natalie-portman-min.jpg"
 };
 
-// Professional.insertMany([pro1,pro2,pro3,pro4,pro5,pro6,pro7,pro8])
-//     .then((data) => {
-//         console.log(`Se han añadido ${data.length} professionals.`);
-//         // mongoose.disconnect();
-//     })
-//     .catch((err) => {
-//         console.log("Error: " + err);
-//     });
+Professional.insertMany([pro1,pro2,pro3,pro4,pro5,pro6,pro7,pro8])
+    .then((data) => {
+        console.log(`Se han añadido ${data.length} professionals.`);
+        mongoose.disconnect();
+    })
+    .catch((err) => {
+        console.log("Error: " + err);
+    });
