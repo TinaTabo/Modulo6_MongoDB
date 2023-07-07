@@ -32,7 +32,16 @@ function postPhotos(req, res){
 }
 
 function putPhotos(req, res){
-    console.log(req.query.userName);
+    let titulo = req.body.title;
+    let descripcion = req.body.description;
+    PhotoModel.updateOne({title: titulo}, {description: descripcion})
+        .then((data) => {
+            res.send('Foto actualizada correctamente.');
+            console.log(data);
+        })
+        .catch((err) => {
+            console.log("Error: " + err);
+        });
 }
 
 function delPhotos(req, res){
