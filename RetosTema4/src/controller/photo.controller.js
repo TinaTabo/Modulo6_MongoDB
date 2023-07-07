@@ -15,7 +15,20 @@ function getPhotos(req, res){
 }
 
 function postPhotos(req, res){
-    console.log(req.query.userName);
+    let photo = new PhotoModel({
+        userName: req.body.userName,
+        url: req.body.url,
+        title: req.body.title,
+        description: req.body.description
+    });
+    PhotoModel.create(photo)
+        .then((data) => {
+            res.send("Documento guardado correctamente");
+            console.log(data);
+        })
+        .catch((err) => {
+            console.log("Error: " + err);
+        });
 }
 
 function putPhotos(req, res){
