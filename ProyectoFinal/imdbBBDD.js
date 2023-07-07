@@ -1,7 +1,7 @@
 //-- Uso del modelo
 let mongoose = require("mongoose");
 
-let Professional = require('./professionalSchema');
+let Professional = require('./apiRest/src/model/professionalSchema');
 
 mongoose.connect('mongodb+srv://cris_taboada:MySecur3Mongo@codenotch.i0gbn5t.mongodb.net/imdb',
                 {useNewUrlParser: false, useUnifiedTopology: false});
