@@ -9,7 +9,7 @@ function getPhotos(req, res){
                 res.send(photo)
             })
             .catch((err) => {
-                console.log("Error: " + err);
+                res.send("Error: " + err);
             });
     }
 }
@@ -27,7 +27,7 @@ function postPhotos(req, res){
             console.log(data);
         })
         .catch((err) => {
-            console.log("Error: " + err);
+            res.send("Error: " + err);
         });
 }
 
@@ -40,12 +40,32 @@ function putPhotos(req, res){
             console.log(data);
         })
         .catch((err) => {
-            console.log("Error: " + err);
+            res.send("Error: " + err);
         });
 }
 
 function delPhotos(req, res){
-    console.log(req.query.userName);
+    let usuario = req.body.userName;
+    let titulo = req.body.title;
+    if (usuario != undefined && titulo != undefined) {
+        PhotoModel.deleteOne({"$and": [{userName: usuario}, {title: titulo}]})
+        .then(function(data) {
+            res.send("Foto correctamente eliminada");
+            console.log(data);
+        })
+        .catch(function() {
+            res.send("Error al eliminar la foto");
+        });
+    }else{
+        PhotoModel.deleteMany({userName: usuario})
+        .then(function(data) {
+            res.send(`Todas las fotos del usuario ${usuario} han sido eliminadas.`);
+            console.log(data);
+        })
+        .catch(function() {
+            res.send("Error al eliminar la foto");
+        });
+    }
 }
 
 module.exports = {getPhotos, postPhotos, putPhotos, delPhotos};
