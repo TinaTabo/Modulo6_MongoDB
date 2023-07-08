@@ -46,7 +46,7 @@ function postPro(req, res){
 function putPro(req, res){
     let answer;
     const {name, lastname, weight, height, isRetired, nationality, oscarsNumber, profession, photo, id} = req.body;
-    ProModel.updateOne({_id: id}, {name: name, lastname: lastname, weight: weight, height: height, isRetired: isRetired, nationality: nationality, oscarsNumber: oscarsNumber, profession: profession, photo: photo})
+    ProModel.findByIdAndUpdate(id, {name: name, lastname: lastname, weight: weight, height: height, isRetired: isRetired, nationality: nationality, oscarsNumber: oscarsNumber, profession: profession, photo: photo})
         .then((pro) => {
             answer = {error: false, code: 200, message: "Professional correctly updated", result: pro};
             res.send(answer);
@@ -56,7 +56,7 @@ function putPro(req, res){
 function delPro(req, res){
     let answer;
     const id = req.body.id;
-    ProModel.deleteOne({_id: id})
+    ProModel.findByIdAndDelete(id)
         .then(function(pro) {
             answer = {error: false, code: 200, message: "Professional correctly deleted", result: pro};
             res.send(answer);
