@@ -1,4 +1,5 @@
 const ProModel = require('../model/professionalSchema');
+const mongoose = require('mongoose');
 
 function getPro(req, res){
     let answer;
@@ -28,6 +29,7 @@ function postPro(req, res){
     let profesional = new ProModel({
         name: req.body.name,
         lastname: req.body.lastname,
+        age: req.body.age,
         weight: req.body.weight,
         height: req.body.height,
         isRetired: req.body.isRetired,
@@ -44,11 +46,57 @@ function postPro(req, res){
 }
 
 function putPro(req, res){
+    let id = req.body.id;
+    let name = req.body.name;
+    let lastname = req.body.lastname;
+    let age = req.body.age;
+    let weight = req.body.weight;
+    let height = req.body.height;
+    let isRetired = req.body.isRetired;
+    let nationality = req.body.nationality;
+    let oscarsNumber = req.body.oscarsNumber;
+    let profession = req.body.profession;
+    let photo = req.body.photo;
+    let proParams = {};
+
+    if (name != undefined) {
+        proParams.name = name;
+    }
+    if (lastname != undefined) {
+        proParams.lastname = lastname;
+    }
+    if (age != undefined) {
+        proParams.age = age;
+    }
+    if (weight != undefined) {
+        proParams.weight = weight;
+    }
+    if (height != undefined) {
+        proParams.height = height;
+    }
+    if (isRetired != undefined) {
+        proParams.isRetired = isRetired;
+    }
+    if (nationality != undefined) {
+        proParams.nationality = nationality;
+    }
+    if (oscarsNumber != undefined) {
+        proParams.oscarsNumber = oscarsNumber;
+    }
+    if (profession != undefined) {
+        proParams.profession = profession;
+    }
+    if (photo != undefined) {
+        proParams.photo = photo;
+    }
+
+    console.log(proParams);
+
     let answer;
-    const {name, lastname, weight, height, isRetired, nationality, oscarsNumber, profession, photo, id} = req.body;
-    ProModel.findByIdAndUpdate(id, {name: name, lastname: lastname, weight: weight, height: height, isRetired: isRetired, nationality: nationality, oscarsNumber: oscarsNumber, profession: profession, photo: photo})
-        .then((pro) => {
-            answer = {error: false, code: 200, message: "Professional correctly updated", result: pro};
+    console.log(id);
+    ProModel.findByIdAndUpdate(id, {"$set": proParams}, {new: true})
+        .then((data) => {
+            answer = {error: false, code: 200, message: "Professional correctly updated", result: data};
             res.send(answer);
         })
 }
