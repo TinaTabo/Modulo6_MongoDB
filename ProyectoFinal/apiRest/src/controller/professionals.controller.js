@@ -59,34 +59,34 @@ function putPro(req, res){
     let photo = req.body.photo;
     let proParams = {};
 
-    if (name != undefined) {
+    if (name != undefined && name !== '') {
         proParams.name = name;
     }
-    if (lastname != undefined) {
+    if (lastname != undefined && lastname !== '') {
         proParams.lastname = lastname;
     }
-    if (age != undefined) {
+    if (age != undefined && age !== '') {
         proParams.age = age;
     }
-    if (weight != undefined) {
+    if (weight != undefined && weight !== '') {
         proParams.weight = weight;
     }
-    if (height != undefined) {
+    if (height != undefined && height !== '') {
         proParams.height = height;
     }
-    if (isRetired != undefined) {
+    if (isRetired != undefined && isRetired !== '') {
         proParams.isRetired = isRetired;
     }
-    if (nationality != undefined) {
+    if (nationality != undefined && nationality !== '') {
         proParams.nationality = nationality;
     }
-    if (oscarsNumber != undefined) {
+    if (oscarsNumber != undefined && oscarsNumber !== '') {
         proParams.oscarsNumber = oscarsNumber;
     }
-    if (profession != undefined) {
+    if (profession != undefined && profession !== '') {
         proParams.profession = profession;
     }
-    if (photo != undefined) {
+    if (photo != undefined && photo !== '') {
         proParams.photo = photo;
     }
 
