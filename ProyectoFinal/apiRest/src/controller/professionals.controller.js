@@ -90,10 +90,10 @@ function putPro(req, res){
         proParams.photo = photo;
     }
 
+    console.log(id);
     console.log(proParams);
 
     let answer;
-    console.log(id);
     ProModel.findByIdAndUpdate(id, {"$set": proParams}, {new: true})
         .then((data) => {
             answer = {error: false, code: 200, message: "Professional correctly updated", result: data};
